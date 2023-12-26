@@ -21,7 +21,9 @@ Projeto designado para Spassu contendo o front-end do desafio propost: catálogo
 - <code>npm install</code>
 - <code>npm run dev</code>
 
+Depois basta acessar o projeto em:
 <br>
+http://localhost:3000
 
 [Erik Urbanski Santos](http://github.com/erikurbanski)
 <br>
