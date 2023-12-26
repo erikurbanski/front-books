@@ -1,17 +1,20 @@
 <script setup>
-
-import { mdiPencil } from '@mdi/js';
-import { mdiDelete } from '@mdi/js';
 import SvgIcon from '@jamescoyle/vue-icon';
 
+import { computed, ref } from "vue";
+import { mdiPencil } from '@mdi/js';
+import { mdiDelete } from '@mdi/js';
 
 const emits = defineEmits(['onUpdate', 'onDelete'])
 function buttonClick(emit, id) {
   emits(emit, id);
 }
 
-const props = defineProps({
-  entity: {
+defineProps({
+  aliasTitle: {
+    type: String,
+  },
+  aliasKey: {
     type: String,
   },
   data: {
@@ -26,14 +29,14 @@ const props = defineProps({
     <thead>
       <tr>
         <th class="text-left">#</th>
-        <th class="text-left">Descrição</th>
+        <th class="text-left">{{ aliasTitle }}</th>
         <th class="text-right">Ações</th>
       </tr>
     </thead>
-    <tbody class="bg-white dark:bg-slate-800">
+    <tbody v-if="data.length" class="bg-white dark:bg-slate-800">
       <tr v-for="(item, i) in data" :key="i">
         <td>{{ item.id }}</td>
-        <td>{{ item.description }}</td>
+        <td>{{ item[aliasKey] }}</td>
         <td class="text-right">
           <button 
             class="mr-2" 
@@ -50,6 +53,11 @@ const props = defineProps({
             <svg-icon type="mdi" :path="mdiPencil"></svg-icon>
           </button>
         </td>
+      </tr>
+    </tbody>
+    <tbody v-else class="bg-white dark:bg-slate-800">
+      <tr>
+        <td class="text-center" colspan="3">Nenhum registro encontrado!</td>
       </tr>
     </tbody>
   </table>
