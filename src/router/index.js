@@ -8,14 +8,19 @@ const routes = [
 		component: Home
 	},
 	{
-		name: 'About',
-		path: '/about',
-		component: () => import('@/views/About.vue')
+		name: 'Assuntos',
+		path: '/subjects',
+		component: () => import('@/views/Subject.vue')
 	},
 	{
-		name: 'Blank',
-		path: '/blank',
-		component: () => import('@/views/Blank.vue')
+		name: 'Autores',
+		path: '/authors',
+		component: () => import('@/views/Authors.vue')
+	},
+	{
+		name: 'Livros',
+		path: '/books',
+		component: () => import('@/views/Books.vue')
 	}
 ]
 

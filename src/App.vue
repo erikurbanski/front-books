@@ -1,5 +1,10 @@
+<script setup>
+	import Header from '@/components/Header.vue';
+</script>
+
 <template>
 	<main class="app">
+		<Header />
 		<router-view></router-view>
 	</main>
 </template>

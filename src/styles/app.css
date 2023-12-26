@@ -6,3 +6,7 @@
 * {
 	font-family: 'Poppins', sans-serif;
 }
+
+.section {
+	@apply w-full bg-gray-100 py-8 px-5 rounded mb-8 shadow-md rounded;
+}
