@@ -58,12 +58,14 @@ const handleDelete = (id) => {
       url: `/books/${id}`,
       method: 'DELETE',
     });
+    console.log(data);
     watch(
-      data,
-      (response) => {
-        useToast().success('Autor removido com sucesso!');
-        bookStore.fetchBooks();
-      }
+        data,
+        (response) => {
+          useToast().success('Livro removido com sucesso!');
+          bookStore.fetchBooks();
+          location.reload();
+        }
     );
   }
 };
@@ -175,8 +177,8 @@ subjectStore.fetchSubjects();
         />
       </div>
 
-      <div class="flex gap-4 justify-center mb-4">
-        <div class="mb-3 xl:w-96">
+      <div class="flex gap-4 justify-center mb-3">
+        <div class="xl:w-96">
           <label class="block text-gray-700 text-sm font-bold mb-2 cursor-pointer" for="year">
             Ano *
           </label>
@@ -193,7 +195,7 @@ subjectStore.fetchSubjects();
             v-model="modelItem.year"
           />
         </div>
-        <div class="mb-3 xl:w-96">
+        <div class="xl:w-96">
           <label class="block text-gray-700 text-sm font-bold mb-2 cursor-pointer" for="edition">
             Edição *
           </label>
@@ -210,7 +212,7 @@ subjectStore.fetchSubjects();
             v-model="modelItem.edition"
           />
         </div>
-        <div class="mb-3 xl:w-96">
+        <div class="xl:w-96">
           <label class="block text-gray-700 text-sm font-bold mb-2 cursor-pointer" for="value">
             Valor *
           </label>
@@ -323,7 +325,7 @@ subjectStore.fetchSubjects();
       </tbody>
       <tbody v-else class="bg-white dark:bg-slate-800">
         <tr>
-          <td class="text-center" colspan="3">Nenhum registro encontrado!</td>
+          <td class="text-center" colspan="6">Nenhum registro encontrado!</td>
         </tr>
       </tbody>
     </table>
