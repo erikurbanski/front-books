@@ -7,6 +7,9 @@
 					{{ route.name }}
 				</a>
 			</template>
+      <a class="bg-gray-600 mr-2 hover:bg-opacity-75 focus:ring-2 text-gray-50 px-5 py-2 rounded inline-block cursor-pointer">
+        Relatório
+      </a>
 		</section>
 	</main>
 </template>

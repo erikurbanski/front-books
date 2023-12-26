@@ -82,16 +82,20 @@ const handleSubmit = () => {
         if (response[0]?.data) {
           useToast().success('Autor salvo com sucesso!');
           authorStore.fetchAuthors();
-          modelItem.value = {
-            id: null,
-            name: null,
-          };
+          handleCancel();
         } else if (response[1]) {
           useToast().error(response[1]);
         }
       },
   );
 };
+
+const handleCancel = () => {
+  modelItem.value = {
+    id: null,
+    name: null,
+  };
+}
 
 authorStore.fetchAuthors();
 </script>
