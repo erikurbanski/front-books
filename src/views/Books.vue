@@ -58,7 +58,6 @@ const handleDelete = (id) => {
       url: `/books/${id}`,
       method: 'DELETE',
     });
-    console.log(data);
     watch(
         data,
         (response) => {
@@ -140,7 +139,7 @@ subjectStore.fetchSubjects();
 <template>
   <section class="w-full bg-gray-100 py-8 px-5 rounded mb-8">
     <form ref="modelForm" autocomplete="off" @submit.prevent="handleSubmit">
-      <h3 class="mb-4">{{ modalTitle }} Autor</h3>
+      <h3 class="mb-4">{{ modalTitle }} Livro</h3>
       <div class="mb-4">
         <label class="block text-gray-700 text-sm font-bold mb-2 cursor-pointer" for="title">
           Título *

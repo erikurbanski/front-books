@@ -1,6 +1,6 @@
 {
-  "name": "Vue Tailwind - A simple starter template",
-  "short_name": "Vue Tailwind",
+  "name": "Catálogo de Livros",
+  "short_name": "Catálogo de Livros",
   "theme_color": "#FFFFFF",
   "background_color": "#FFFFFF",
   "display": "standalone",
