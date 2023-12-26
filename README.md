@@ -18,6 +18,8 @@ Projeto designado para Spassu contendo o front-end do desafio propost: catálogo
 ### Para clonar e executar o repositório:
 - <code>git clone https://github.com/erikurbanski/front-books.git </code>
 - <code>cd front-books</code>
+- <code>rm -rf .git/</code>
+- <code>cp .env.example .env</code>
 - <code>npm install</code>
 - <code>npm run dev</code>
 
