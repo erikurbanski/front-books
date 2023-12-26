@@ -1,7 +1,6 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { computed, ref, watch } from "vue";
-
 import { useAxios } from "@/hooks/useAxios";
 import { useToast } from "vue-toastification";
 import { useSubjectStore } from "@/stores/entities/useSubjectStore.js";
@@ -44,11 +43,11 @@ const handleDelete = (id) => {
     });
 
     watch(
-        data,
-        (response) => {
-          useToast().success('Assunto removido com sucesso!');
-          subjectStore.fetchSubjects();
-        }
+      data,
+      (response) => {
+        useToast().success('Assunto removido com sucesso!');
+        subjectStore.fetchSubjects();
+      }
     );
   }
 };
@@ -77,16 +76,16 @@ const handleSubmit = () => {
   });
 
   watch(
-      [data, error],
-      (response) => {
-        if (response[0]?.data) {
-          useToast().success('Assunto salvo com sucesso!');
-          subjectStore.fetchSubjects();
-          handleCancel();
-        } else if (response[1]) {
-          useToast().error(response[1]);
-        }
-      },
+    [data, error],
+    (response) => {
+      if (response[0]?.data) {
+        useToast().success('Assunto salvo com sucesso!');
+        subjectStore.fetchSubjects();
+        handleCancel();
+      } else if (response[1]) {
+        useToast().error(response[1]);
+      }
+    },
   );
 };
 

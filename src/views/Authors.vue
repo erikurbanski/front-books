@@ -1,7 +1,6 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { computed, ref, watch } from "vue";
-
 import { useAxios } from "@/hooks/useAxios";
 import { useToast } from "vue-toastification";
 import { useAuthorStore } from "@/stores/entities/useAuthorStore.js";
@@ -44,11 +43,11 @@ const handleDelete = (id) => {
     });
 
     watch(
-        data,
-        (response) => {
-          useToast().success('Autor removido com sucesso!');
-          authorStore.fetchAuthors();
-        }
+      data,
+      (response) => {
+        useToast().success('Autor removido com sucesso!');
+        authorStore.fetchAuthors();
+      }
     );
   }
 };
@@ -60,11 +59,11 @@ const handleGetAuthor = (id) => {
   });
 
   watch(
-      data,
-      (response) => {
-        editMode.value = true;
-        modelItem.value = response.data;
-      }
+    data,
+    (response) => {
+      editMode.value = true;
+      modelItem.value = response.data;
+    }
   );
 };
 
@@ -77,16 +76,16 @@ const handleSubmit = () => {
   });
 
   watch(
-      [data, error],
-      (response) => {
-        if (response[0]?.data) {
-          useToast().success('Autor salvo com sucesso!');
-          authorStore.fetchAuthors();
-          handleCancel();
-        } else if (response[1]) {
-          useToast().error(response[1]);
-        }
-      },
+    [data, error],
+    (response) => {
+      if (response[0]?.data) {
+        useToast().success('Autor salvo com sucesso!');
+        authorStore.fetchAuthors();
+        handleCancel();
+      } else if (response[1]) {
+        useToast().error(response[1]);
+      }
+    },
   );
 };
 
@@ -109,16 +108,16 @@ authorStore.fetchAuthors();
           Nome *
         </label>
         <input
-            required
-            type="text"
-            maxlength="40"
-            id="name"
-            name="name"
-            placeholder="Entre com o nome do autor..."
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            @input="$emit('update:modelValue', $event.target.value || null)"
-            @blur="handleBlurInput($event)"
-            v-model="modelItem.name"
+          required
+          type="text"
+          maxlength="40"
+          id="name"
+          name="name"
+          placeholder="Entre com o nome do autor..."
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          @input="$emit('update:modelValue', $event.target.value || null)"
+          @blur="handleBlurInput($event)"
+          v-model="modelItem.name"
         />
       </div>
       <div class="mt-5 w-100 flex justify-end">
@@ -139,11 +138,11 @@ authorStore.fetchAuthors();
   </section>
   <section class="w-full bg-gray-100 py-8 px-5 rounded mb-8">
     <Grid
-        aliasTitle="Nome Completo"
-        aliasKey="name"
-        :data="authors"
-        @on-delete="handleDelete"
-        @on-update="handleGetAuthor"
+      aliasTitle="Nome Completo"
+      aliasKey="name"
+      :data="authors"
+      @on-delete="handleDelete"
+      @on-update="handleGetAuthor"
     />
   </section>
 </template>
