@@ -1,9 +1,10 @@
 <script setup>
 import { storeToRefs } from "pinia";
 import { computed, ref, watch } from "vue";
-import { mdiDelete, mdiPencil } from "@mdi/js";
-import { useAxios } from "@/hooks/useAxios";
 import { useToast } from "vue-toastification";
+
+import { useAxios } from "@/hooks/useAxios";
+import { mdiDelete, mdiPencil } from "@mdi/js";
 import { useBookStore } from "@/stores/entities/useBookStore.js";
 import { useAuthorStore } from "@/stores/entities/useAuthorStore.js";
 import { useSubjectStore } from "@/stores/entities/useSubjectStore.js";
@@ -50,7 +51,6 @@ const handleSelect = (value) => {
   emits("on-change", value);
 };
 
-/** Verificar remoção pois esta com problema de integridade. **/
 const handleDelete = (id) => {
   const confirm = window.confirm('Deseja realmente remover este registro?');
   if (confirm) {
@@ -59,12 +59,12 @@ const handleDelete = (id) => {
       method: 'DELETE',
     });
     watch(
-        data,
-        (response) => {
-          useToast().success('Livro removido com sucesso!');
-          bookStore.fetchBooks();
-          location.reload();
-        }
+      data,
+      (response) => {
+        useToast().success('Livro removido com sucesso!');
+        bookStore.fetchBooks();
+        location.reload();
+      }
     );
   }
 };
@@ -119,6 +119,7 @@ const formatCurrency = (value) => {
 }
 
 const handleCancel = () => {
+  editMode.value = false;
   modelItem.value = {
     id: null,
     title: null,
@@ -137,13 +138,11 @@ subjectStore.fetchSubjects();
 </script>
 
 <template>
-  <section class="w-full bg-gray-100 py-8 px-5 rounded mb-8">
+  <section class="section">
     <form ref="modelForm" autocomplete="off" @submit.prevent="handleSubmit">
       <h3 class="mb-4">{{ modalTitle }} Livro</h3>
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2 cursor-pointer" for="title">
-          Título *
-        </label>
+        <label for="title">Título *</label>
         <input
           required
           type="text"
@@ -151,17 +150,15 @@ subjectStore.fetchSubjects();
           id="title"
           name="title"
           placeholder="Entre com o título..."
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          @input="$emit('update:modelValue', $event.target.value || null)"
-          @blur="handleBlurInput($event)"
+          class="focus:outline-none focus:shadow-outline"
           v-model="modelItem.title"
+          @blur="handleBlurInput($event)"
+          @input="$emit('update:modelValue', $event.target.value || null)"
         />
       </div>
 
       <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2 cursor-pointer" for="publisher">
-          Editora *
-        </label>
+        <label for="publisher">Editora *</label>
         <input
           required
           type="text"
@@ -169,10 +166,10 @@ subjectStore.fetchSubjects();
           id="publisher"
           name="publisher"
           placeholder="Entre com a editora..."
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          @input="$emit('update:modelValue', $event.target.value || null)"
-          @blur="handleBlurInput($event)"
+          class="focus:outline-none focus:shadow-outline"
           v-model="modelItem.publisher"
+          @blur="handleBlurInput($event)"
+          @input="$emit('update:modelValue', $event.target.value || null)"
         />
       </div>
 
@@ -188,16 +185,14 @@ subjectStore.fetchSubjects();
             id="year"
             name="year"
             placeholder="Entre com o ano..."
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            @input="$emit('update:modelValue', $event.target.value || null)"
-            @blur="handleBlurInput($event)"
+            class="focus:outline-none focus:shadow-outline"
             v-model="modelItem.year"
+            @blur="handleBlurInput($event)"
+            @input="$emit('update:modelValue', $event.target.value || null)"
           />
         </div>
         <div class="xl:w-96">
-          <label class="block text-gray-700 text-sm font-bold mb-2 cursor-pointer" for="edition">
-            Edição *
-          </label>
+          <label for="edition">Edição *</label>
           <input
             required
             type="number"
@@ -205,26 +200,24 @@ subjectStore.fetchSubjects();
             id="edition"
             name="edition"
             placeholder="Entre com a edição..."
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            @input="$emit('update:modelValue', $event.target.value || null)"
-            @blur="handleBlurInput($event)"
+            class="focus:outline-none focus:shadow-outline"
             v-model="modelItem.edition"
+            @blur="handleBlurInput($event)"
+            @input="$emit('update:modelValue', $event.target.value || null)"
           />
         </div>
         <div class="xl:w-96">
-          <label class="block text-gray-700 text-sm font-bold mb-2 cursor-pointer" for="value">
-            Valor *
-          </label>
+          <label for="value">Valor *</label>
           <input
             required
             type="text"
             id="value"
             name="value"
             placeholder="Entre com o valor..."
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            @input="$emit('update:modelValue', $event.target.value || null)"
-            @blur="handleBlurInput($event)"
+            class="focus:outline-none focus:shadow-outline"
             v-model="modelItem.value"
+            @blur="handleBlurInput($event)"
+            @input="$emit('update:modelValue', $event.target.value || null)"
           />
         </div>
       </div>
@@ -270,22 +263,13 @@ subjectStore.fetchSubjects();
       </div>
 
       <div class="mt-5 w-100 flex justify-end">
-        <a
-          @click="handleSubmit"
-          class="bg-gray-600 ml-2 hover:bg-opacity-75 focus:ring-2 text-gray-50 px-2 py-2 rounded inline-block cursor-pointer"
-        >
-          Salvar
-        </a>
-        <a
-          @click="handleCancel"
-          class="bg-gray-600 ml-2 hover:bg-opacity-75 focus:ring-2 text-gray-50 px-2 py-2 rounded inline-block cursor-pointer"
-        >
-          Cancelar
-        </a>
+        <a @click="handleSubmit" class="button">Salvar</a>
+        <a @click="handleCancel" class="button">Cancelar</a>
       </div>
     </form>
   </section>
-  <section class="w-full bg-gray-100 py-8 px-5 rounded mb-8">
+
+  <section class="section">
     <table class="border-collapse table-auto w-full text-sm">
       <thead>
         <tr>
